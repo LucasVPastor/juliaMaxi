@@ -1,0 +1,53 @@
+.container-fluid{
+    background-color: rgb(56, 56, 57);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header{
+    height: 8vh;
+    background-color: #6BA38E;
+
+}
+.main{
+    height: 75vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10%;
+}
+
+
+.ladoD{
+    height: 100%;
+    width: 100%;
+    padding-left: 1vw;
+/*    background-color rgb(1, 126, 1); */
+}
+.ladoD h1{
+    text-align: center;
+    color: black;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3vh;
+    margin-top: 8vh;
+}
+.form-control{
+    width: 100%;
+    height: 1vh;
+}
+.btn-form{
+    display: flex;
+    justify-content: flex-end;
+}
+.ladoD p{
+    text-align: center;
+    font-size: 1rem;
+}
