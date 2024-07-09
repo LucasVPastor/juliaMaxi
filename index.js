@@ -25,12 +25,28 @@ import { getDatabase, ref, set, get, child, onValue, update, remove } from "http
   const db = getDatabase();
     //------- Referencias -----------
  
-  var nomeLivro = document.getElementById("nomeLivro");
-  var nomeLivroP = document.getElementById("nomeLivroP");
-  var insBtn = document.getElementById("Insbtn");
-  var slctBtn = document.getElementById("Slctbtn");
-  var filtroFc = document.getElementById("filtroFc");
+  var usuId = document.getElementById("usuario");
+  var usuSenha = document.getElementById("senha");
+ //----------------------------------------------------------------------------------------------------
+ function validaForm(){
+    const dbref = ref(db);
  
+    get(child(dbref,"bdTeste/usuario"+usuario))
+    .then((snapshot)=>{
+        if(snapshot.exists()){
+            usuSenha.value = snapshot.val().usuPassword;
+            var usuNome = snapshot.val().usuNome;
+            alert("Seja Bem Vindo(a)"+usuNome);
+        }
+        else{
+            alert("Este usuário não existe");
+        }
+
+    })
+    .catch((error)=>{
+        alert("Erro: "+ error);
+    })
+ }
   // ---------- insert function ---------------------------C:\xampp\htdocs\juliaMaximino\index.html
  
  function InserirDados(){

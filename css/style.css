@@ -1,16 +1,29 @@
 .container-fluid{
-    background-color: rgb(56, 56, 57);
+    background-color: #355046;
     height: 100vh;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-header{
-    height: 8vh;
-    background-color: #6BA38E;
 
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
 }
+.imgLogo{
+    height: auto;
+    width: 14rem;
+    animation: float 4s ease-in-out infinite;
+}
+
 .main{
     height: 75vh;
     width: 50vw;
@@ -21,22 +34,14 @@ header{
     background-color: rgb(255, 255, 255);
     border-radius: 10%;
 }
-
-
-.ladoD{
-    height: 100%;
-    width: 100%;
-    padding-left: 1vw;
-/*    background-color rgb(1, 126, 1); */
-}
-.ladoD h1{
+.col h1{
     text-align: center;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 .form{
     display: flex;
     flex-direction: column;
-    row-gap: 3vh;
+    row-gap: 2vh;
     margin-top: 8vh;
 }
 .form-control{
