@@ -24,10 +24,14 @@ var card2 = document.getElementById("card2");
 
 
 card1.onclick = function () {trocaPag("agenda") ;}
-card2.onclick = function () {trocaPag("home") ;}
+card2.onclick = function () {trocaPag("pacientes") ;}
+card3.onclick = function () {trocaPag("publicacao") ;}
+card4.onclick = function () {trocaPag("financeiro") ;}
+card5.onclick = function () {trocaPag("manutencao") ;}
+card6.onclick = function () {trocaPag("manutencao") ;}
 
 
 function trocaPag(pag){
-    console.log("ENtrei")
+    console.log("Entrei")
     window.location.href = pag+".html";
 }
