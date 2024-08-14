@@ -79,7 +79,7 @@ footer {
     gap: 2dvw;
     flex-wrap: wrap;
 }
-.row{
+.row-C{
     justify-content: center;
 }
 .cardDia {
@@ -140,10 +140,76 @@ footer {
     cursor: pointer;
 }
 
+
+.btn-add{
+    background-color: #32a57b;
+    border-color: #ffffff00; 
+    margin-bottom: 1dvw !important;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+}
+.headInfo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 3dvh;
+}
+.headInfo h1{
+    max-width: 30rem;
+}
+.infoPacientes{
+    display: flex;
+    justify-content: space-evenly;
+}
+.infoPacientes h4{
+    margin-top: 1.7dvh;
+}
+.dropdown{
+    margin-left: 1.5dvw;
+}
 /* .input-group{
     max-width: 80dvw;
 } */
+.aFoto{
+    color: rgb(85, 85, 85);
+    text-align: center;
+}
 
+.modal-dialog {
+    max-width: 800px; /* Define um tamanho máximo para o modal */
+    text-align: center;
+}
+
+.modal-body {
+    max-height: 500px; /* Limita a altura do conteúdo do modal */
+    overflow-y: auto; /* Adiciona uma barra de rolagem se necessário */
+}
+
+#imageContainer {
+    max-width: 100%; /* O contêiner da imagem deve se ajustar ao modal */
+    max-height: 400px; /* Define a altura máxima para a área de recorte */
+    overflow: hidden; /* Oculta o que ultrapassar do contêiner */
+    margin-top: 10px;
+}
+
+#imagePreview {
+    width: 100%; /* Ajusta a largura da imagem para ocupar todo o contêiner */
+    height: auto; /* Mantém a proporção da imagem */
+    object-fit: cover; /* Ajusta a imagem dentro do contêiner */
+}
+
+.container-pA{
+    max-width: 80%;
+}
+.drop{
+    display: flex;
+}
+.dropdown-item{
+    font-weight: 500;
+}
+.gapBtn{
+    gap: 0.4dvh;
+}
 
 @media (max-width: 768px) {
 
@@ -154,7 +220,7 @@ footer {
         height: 3rem;
         min-width: 1rem;
         max-width: auto;
-    }
+    }                                                                                                                                                                                                                                                                                                                      
     .dia{
         font-size: 1.5rem;
         text-align: center;
@@ -165,4 +231,50 @@ footer {
         font-size: 0.85rem;
     }
 
+    .btn-add{
+        max-width: 30dvw;
+    }
+    .headInfo{
+        flex-direction: column;
+    }
+
+    .card{
+        width: 10rem !important;
+    }
+    .drop{
+        justify-content: center;
+    }
+}
+/* -------------------------CORES DE ELEMENTOS-------------------------- */
+/* BOTOES */
+.btn-verde{
+    background-color: #009c63;
+    font-weight: 600;
+}
+.btn-verde:hover{
+    background-color: #017a4e !important;
+}
+.btn-verde.show{
+    background-color: #46af89 !important;
+}
+.btn-laranja{
+    background-color: #fc952e !important;
+}
+.btn-laranja.show{
+    background-color: #eb8d30 !important;
+}
+/* DROPS */
+.drop-verde{
+    background-color: #389474fd;
+}
+.drop-laranja{
+    background-color: #d67616 !important;
+}
+/* DROPS ITENS */
+
+.di-verde:hover{
+    background-color: #28d699fd; 
+}
+.di-laranja:hover{
+    background-color: #df9347; 
 }

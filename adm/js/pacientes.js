@@ -51,10 +51,10 @@ function AddAllItemToTable(pacientes){
 
 function GetAllDataRealTime(){
     const dbref = ref(db, "bdTeste/usuario");
-
     onValue(dbref, (snapshot) => {
         var pacientes = [];
         snapshot.forEach(childSnapshot => {
+            console.log("3");
             pacientes.push(childSnapshot.val());
         });
         AddAllItemToTable(pacientes);
