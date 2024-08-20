@@ -40,26 +40,29 @@ const storage = getStorage(app);
 
 
     function AddItemToTable(nomPacientes, usuIdadePaci, altuPaci, usuPesoInicial, usuPesoAtual, usuFoto ){
-        console.log("------- AddItemToTable");
-        
+        console.log("------- AddItemToTable // dadosPacientes.js");
+        console.log('Nome:', nomPacientes);
+        console.log('Foto URL:', usuFoto);
+    
         nomePaci.innerText = nomPacientes;
-
+    
         idadePaci.value = usuIdadePaci;
         alturaPaci.value = altuPaci;
         pesoIniPaci.value = usuPesoInicial;
         pesoAtuPaci.value = usuPesoAtual;
-        
-        if(usuFoto == ""){
-           fotoUsuario.src= "../../asset/img/person.jpg";
+    
+        if(usuFoto == "" || usuFoto == undefined){
+            fotoUsuario.src = "https://firebasestorage.googleapis.com/v0/b/juliamaximino-7e217.appspot.com/o/fotosUsu%2Fperson.jpg?alt=media&token=01157c5b-63ed-47ba-9b62-4054410729f9";
+        } else {
+            fotoUsuario.src = usuFoto;
         }
-        else{
-            fotoUsuario.src= usuFoto;
-        }
-
-    } 
+    
+        console.log('Foto src definida como:', fotoUsuario.src);
+    }
+    
  
     function AddAllItemToTable(usuario){
-        console.log("------- AddAllItemToTable");
+        console.log("------- AddAllItemToTable  // dadosPacientes.js");
      stdNo = 0;
      usuario.forEach(element => {
         if(element.usuId == id){     
@@ -91,7 +94,7 @@ const storage = getStorage(app);
  console.log(id);
      onValue(dbref,(snapshot)=>{ 
          var usuario =[];
-         console.log("------- GetAllDataRealTime");
+         console.log("------- GetAllDataRealTime  // dadosPacientes.js");
 
          snapshot.forEach(childSnapshot => {
  

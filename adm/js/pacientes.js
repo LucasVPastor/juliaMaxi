@@ -38,12 +38,13 @@ function AddItemToTable(idPaci, nomPacientes, idadePaci, dtEntradaPaci){
     tbody.appendChild(tr);
 
     tr.onclick = function () {
-        window.location.href = "dadosPacientes/index.html?usuId=" + this.id;
+        window.location.href = "dadosPacientes/dPaciente.html?usuId=" + this.id;
     };
 } 
 
 function AddAllItemToTable(pacientes){
     tbody.innerHTML = "";
+    console.log(pacientes)
     pacientes.forEach(element => {
         AddItemToTable(element.usuId, element.usuNome, element.usuIdade, element.usuDataEntrada);
     });
@@ -54,7 +55,7 @@ function GetAllDataRealTime(){
     onValue(dbref, (snapshot) => {
         var pacientes = [];
         snapshot.forEach(childSnapshot => {
-            console.log("3");
+            console.log("GetAllDataRealTime");
             pacientes.push(childSnapshot.val());
         });
         AddAllItemToTable(pacientes);

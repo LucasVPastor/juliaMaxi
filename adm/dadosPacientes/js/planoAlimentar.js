@@ -1,6 +1,6 @@
   
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-storage.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject  } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-storage.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -131,20 +131,33 @@ const storage = getStorage(app);
   
   window.onload = GetAllDataOnce;
 
+// REFERENCIA
+let nomeAqruivo;
 // Função para salvar arquivos no Firebase Storage
 function salvaArquivo(id, fileInputId) {
     const dbref = ref(db);
     const fileInput = document.getElementById(fileInputId);
     const file = fileInput.files[0];
     let URLdownload;
+    nomeAqruivo = file.name;
 
     if (!file) {
         console.error("Nenhum arquivo foi selecionado!");
         return;
     }
 
+    // Mostra o SweetAlert de carregamento
+    Swal.fire({
+        title: 'Salvando arquivo...',
+        text: 'Por favor, aguarde enquanto o arquivo está sendo salvo.',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
     // Cria um nome único para o arquivo a ser salvo
-    const uniqueName = id + '_' + Date.now() + '_' + file.name;
+    const uniqueName = id + '_' + Date.now() + '_' + nomeAqruivo;
     const newStorageRef = storageRef(storage, 'arquivosUsu/' + uniqueName);
 
     // Faz o upload do arquivo para o Firebase Storage
@@ -160,7 +173,11 @@ function salvaArquivo(id, fileInputId) {
         })
         .then((snapshot) => {
             const planos = snapshot.val() || [];
-            planos.push({ urlArquivo: URLdownload });
+            planos.push({ 
+                urlArquivo: URLdownload,
+                fileName: nomeAqruivo,
+                uniqueFileName: uniqueName // Salva o nome único junto com a URL
+             });
 
             return update(child(dbref, `bdTeste/usuario/${id}`), {
                 planosAlimentares: planos
@@ -168,11 +185,24 @@ function salvaArquivo(id, fileInputId) {
         })
         .then(() => {
             console.log("Dados de 'usuario' atualizados com sucesso!");
+            Swal.fire({
+                title: 'Sucesso!',
+                text: 'O arquivo foi salvo com sucesso.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
         })
         .catch((error) => {
             console.error("Erro ao atualizar dados de 'usuario': ", error);
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Houve um problema ao salvar o arquivo.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         });
 }
+
 // Botão para salvar o arquivo e um input file com id "arquivoInput"
 var btnSalvaArquivo = document.getElementById("btnSalvaArquivo");
     btnSalvaArquivo.addEventListener('click', () => salvaArquivo(id, "arquivoInput"));
@@ -182,7 +212,6 @@ const listaContainer = document.getElementById('listaPlanos');
 function buscaPlanoAlimentar(){
     const dbref = ref(db, "bdTeste/usuario/" + id + "/planosAlimentares/");
     let pA = [];
-    
     onValue(dbref, (snapshot) => { 
         pA = []; // Reinicia o array para garantir que não haja duplicações
         snapshot.forEach(childSnapshot => {
@@ -193,17 +222,112 @@ function buscaPlanoAlimentar(){
     });
 }
 
-// Função auxiliar para adicionar os links à lista no HTML
-function addPlanoLista(pA){
-    listaContainer.innerHTML = ""; // Limpa a lista antes de preencher
+// Função para exibir a lista de planos alimentares com checkboxes
+function addPlanoLista(pA) {
+    listaContainer.innerHTML = ""; 
+    var nInput = 0;
+
     pA.forEach(plano => {
-        const linkElement = document.createElement('a');
-        linkElement.href = plano.urlArquivo;
-        linkElement.textContent = plano.urlArquivo.split('/').pop(); // Nome do arquivo
-        linkElement.target = '_blank'; // Abre em uma nova aba
+        const linkElement = document.createElement('li');
+        linkElement.className = "list-group-item list-group-item-action";
+
+        const checkLink = document.createElement('input');
+        checkLink.className = "form-check-input me-1";
+        checkLink.type = "checkbox";
+        checkLink.id = pA[nInput].uniqueFileName;
+
+        const labelLink = document.createElement('a');
+        labelLink.href = plano.urlArquivo;
+        labelLink.textContent = plano.fileName; // Nome do arquivo
+        labelLink.target = '_blank'; // Abre em uma nova aba
+
+        checkLink.addEventListener('change', function() {
+            if (this.checked) {
+                Swal.fire({
+                    title: 'Tem certeza?',
+                    text: "Você deseja deletar este arquivo?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sim, deletar!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteFile(this.id, id); // Passando `id` corretamente
+                    } else {
+                        this.checked = false;
+                    }
+                });
+            }
+        });
         
-        const listItem = document.createElement('li');
-        listItem.appendChild(linkElement);
-        listaContainer.appendChild(listItem);
+
+        linkElement.appendChild(checkLink); 
+        linkElement.appendChild(labelLink);       
+        listaContainer.appendChild(linkElement);
+
+        nInput++;
     });
 }
+
+// Função para deletar o arquivo do Firebase Storage e da base de dados
+function deleteFile(uniqueFileName) {
+    // Referência ao arquivo no Firebase Storage
+    const fileRef = storageRef(storage, 'arquivosUsu/' + uniqueFileName);
+    
+    // Referência à entrada correspondente no Realtime Database
+    const dbref = ref(db, `bdTeste/usuario/${id}/planosAlimentares`);
+    
+    // SweetAlert de confirmação
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: "Você não poderá reverter esta ação!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, deletar!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Primeiro, deletar o arquivo do Firebase Storage
+            deleteObject(fileRef)
+                .then(() => {
+                    console.log("Arquivo deletado com sucesso!");
+
+                    // Agora, remover a entrada correspondente no Realtime Database
+                    return get(dbref);
+                })
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const planos = snapshot.val();
+                        const updatedPlanos = planos.filter(plano => plano.uniqueFileName !== uniqueFileName);
+
+                        // Atualiza o Realtime Database com a lista filtrada
+                        return update(ref(db, `bdTeste/usuario/${id}`), {
+                            planosAlimentares: updatedPlanos
+                        });
+                    } else {
+                        throw new Error('O plano alimentar não foi encontrado no banco de dados.');
+                    }
+                })
+                .then(() => {
+                    Swal.fire(
+                        'Deletado!',
+                        'O arquivo foi deletado.',
+                        'success'
+                    );
+                })
+                .catch((error) => {
+                    console.error("Erro ao deletar arquivo: ", error);
+                    Swal.fire(
+                        'Erro!',
+                        'Houve um problema ao deletar o arquivo ou atualizar o banco de dados.',
+                        'error'
+                    );
+                });
+        }
+    });
+}
+
+
+

@@ -8,55 +8,138 @@
     <title>Dev. LuTec</title>
 </head>
 <body>
-    <header>
-        <h1>Julia Maximino</h1>
+    <header class="d-flex justify-content-between align-items-center" style="padding: 0 4vw;">
+        <!-- Left side: Image and Name -->
+        <div class="d-flex align-items-center">
+            <img id="imgUser" alt="Profile Picture" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+            <h1 id="nomeUser" style="font-size: 1.5rem; margin: 0; color: #ffffff;"></h1>
+        </div>
+        <!-- Right side: Login/Logout Button -->
+        <div>
+            <a class="">Login</a> <!-- ou Logout -->
+        </div> 
     </header>
-    <main class="container-fluid">
-        <div class="mainTop">
-            <button class="btn btn-primary" id="antMes"> MÊS ANTERIOR </button>
-            <h1 id="mesAno"></h1>
-            <button class="btn btn-primary" id="proxMes"> PRÓXIMO MÊS </button>
-        </div>
-        <hr>
-        <div class="row text-center">
-            <div class="col"><h1>Dom</h1></div>
-            <div class="col"><h1>Seg</h1></div>
-            <div class="col"><h1>Ter</h1></div>
-            <div class="col"><h1>Qua</h1></div>
-            <div class="col"><h1>Qui</h1></div>
-            <div class="col"><h1>Sex</h1></div>
-            <div class="col"><h1>Sáb</h1></div>
-        </div>
-        <div class="row-C" id="cardsCalendario">
-            <!-- ADD VIA JS -->
-        </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <h2>  OII JULIAAAA!! <br>
-                    Vamos configurar para seus pacientes apareçam aqui juntamente ao horário.</h2>
-                    <br> <h1>O BOTAO SALVAR NAO FAZ NADA AINDA</h1>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar</button>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="navbar btn-laranja flex-column p-3">
+            <div id="toggleSidebar">
+                <span>&#9664;</span> <!-- Seta esquerda -->
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" id="card7">
+                        <span class="icon"><img class="iconeMenu" src="../asset/icon/casa.png" alt=""></span>
+                        <span class="text">HOME</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" id="card1">
+                        <span class="icon"><img class="iconeMenu" src="../asset/icon/agenda.png" alt=""></span>
+                        <span class="text">AGENDA</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" id="card2">
+                        <span class="icon"><img class="iconeMenu" src="../asset/icon/pacientes.png" alt=""></span>
+                        <span class="text">PACIENTES</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" id="card3">
+                        <span class="icon"><img class="iconeMenu" src="../asset/icon/publicacao.png" alt=""></span>
+                        <span class="text">PUBLICAÇÃO</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" id="card4">
+                    <span class="icon"><img class="iconeMenu" src="../asset/icon/financeiro.png" alt=""></span>
+                        <span class="text">FINANCEIRO</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" id="card5">
+                        <span class="icon"><img class="iconeMenu" src="../asset/icon/manutencao.png" alt=""></span>
+                        <span class="text">---</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#" id="card6">
+                        <span class="icon"><img class="iconeMenu" src="../asset/icon/manutencao.png" alt=""></span>
+                        <span class="text">---</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <main class="container-fluid">
+            <div class="mainTop">
+                <button class="btn btn-primary" id="antMes"> MÊS ANTERIOR </button>
+                <h1 id="mesAno"></h1>
+                <button class="btn btn-primary" id="proxMes"> PRÓXIMO MÊS </button>
+            </div>
+            <hr>
+            <div class="row text-center">
+                <div class="col"><h1>Dom</h1></div>
+                <div class="col"><h1>Seg</h1></div>
+                <div class="col"><h1>Ter</h1></div>
+                <div class="col"><h1>Qua</h1></div>
+                <div class="col"><h1>Qui</h1></div>
+                <div class="col"><h1>Sex</h1></div>
+                <div class="col"><h1>Sáb</h1></div>
+            </div>
+            <div class="row-C" id="cardsCalendario">
+                <!-- ADD VIA JS -->
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h2>OII JULIAAAA!! <br>
+                                Vamos configurar para seus pacientes apareçam aqui juntamente ao horário.</h2>
+                            <br> <h1>O BOTAO SALVAR NAO FAZ NADA AINDA</h1>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
+        </main>
+    </div>
 
-    </main>
     <footer>
         <h1>Lucas M.| Desenvolvimento</h1>
     </footer>
-<script type="module" src="js/agenda.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script type="module" src="js/agenda.js"></script>
+    <script src="../basicos/js/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        });
+        card7.onclick = function () {trocaPag("home");}
+
+        card1.onclick = function () {trocaPag("agenda");}
+        card2.onclick = function () {trocaPag("pacientes");}
+        card3.onclick = function () {trocaPag("publicacao");}
+        card4.onclick = function () {trocaPag("financeiro");}
+        card5.onclick = function () {trocaPag("manutencao");}
+        card6.onclick = function () {trocaPag("manutencao");}
+
+        function trocaPag(pag){
+            console.log("home.js // Entrei " + pag+".html")
+            window.location.href = pag+".html";
+        }
+    </script>
 </body>
 </html>
