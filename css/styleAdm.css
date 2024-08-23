@@ -1,5 +1,13 @@
+/* -----------------------------FONTES------------------------------ */
+
+@font-face{
+    font-family: Titulo;
+    src: url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+}
+
+/* -------------------------ESTILOS GERAIS-------------------------- */
 body {
-    background-color: #11662d;
+    background-color: #006400 /* #10742e */;
     overflow-x: hidden;
     padding: 0;
     margin: 0;
@@ -12,10 +20,12 @@ header {
     text-align: center;
     padding: 10px;
 }
+
 main {
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     padding: 20px;
 }
+
 footer {
     display: flex;
     justify-content: center;
@@ -33,43 +43,53 @@ footer {
 .container-fluid h1 {
     text-align: center;
 }
-.mainTop{
+
+.mainTop {
     padding-top: 2dvh;
     display: flex;
     justify-content: center;
     gap: 2dvw;
 }
 
+/* -------------------------ESTILOS DO MENU LATERAL-------------------------- */
 #sidebar {
-    height: 100vh;
-    width: 15dvw;
-    position: relative;
-    transition: width 0.3s;
+    width: 250px; /* Largura do menu expandido */
+    transition: width 0.3s ease;
 }
-#sidebar.collapsed {
-    width: 10dvh;
-}
-#sidebar .nav-link {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 
+.sd-color-verde{
+    background-color: #8FBC8F /* #0cb49e*/ !important;
 }
-#sidebar .nav-link .icon {
-    min-width: 40px;
-    text-align: center;
-    transition: opacity 0.3s;
+.nav-link:hover{
+    background-color: #5c965c !important;
 }
-#sidebar.collapsed .nav-link {
-    justify-content: center;
+.nomeUsuario{
+    font-size: 1.5rem; 
+    margin: 0; 
+    color: #ffffff; 
+    font-family: Titulo, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
-#sidebar.collapsed .nav-link span.text {
-    display: none;
+
+#sidebar.collapsed {
+    width: 70px; /* Ajuste conforme necessário */
 }
+
+.SideBar {
+    width: 4.5rem;
+}
+
+.SideBar.collapsed {
+    width: 15rem;
+}
+
 #toggleSidebar {
     position: absolute;
-    top: 20px;
-    right: -15px;
+    top: 80px;
+    left: 235px; /* Ajuste conforme necessário */
     width: 30px;
     height: 30px;
     background-color: #005f15;
@@ -78,127 +98,158 @@ footer {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform 0.3s, left 0.3s ease;
 }
+
 #sidebar.collapsed #toggleSidebar {
+    top: 80px;
+    left: 55px; /* Ajuste conforme necessário */
     transform: rotate(180deg);
 }
-.iconeMenu{
-    cursor: pointer;
+
+#sidebar.collapsed .menu-label {
+    display: none;
 }
-.ancoraLogout{
+
+#sidebar .menu-label {
+    display: inline-block;
+    margin-left: 10px;
+    color: rgb(0, 0, 0); 
+    font-size: 1.2rem; 
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+/* -------------------------ESTILOS DE ÍCONES E BOTÕES-------------------------- */
+.iconeMenu {
+    cursor: pointer;
+    max-width: 2.6dvw;
+}
+
+.ancoraLogout {
     cursor: pointer;
     text-decoration: none;
     color: black;
     font-weight: 700;
 }
+
+/* -------------------------ESTILOS DE CONTEÚDO-------------------------- */
 .container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
 }
+
 .cardsCalendario {
     display: flex;
     gap: 2dvw;
     flex-wrap: wrap;
 }
-.row-C{
-    justify-content: center;
+
+.card-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px;
 }
-.cardDia {
-    margin-top: 3dvh;
-    margin-bottom: 3dvh;
-    height: 8rem;
-    min-width: 10rem;
-    max-width: auto;
 
-    background-color: #45836c9d;
-
-    border-color: black;
-    border-style: solid;
-    border-width: 0.18rem;
-    border-radius: 16px;
-
+.card {
+    padding: 0.5dvw;
+    min-width: 250px; /* Define a largura mínima do card */
+    margin-right: 15px;
+    flex: 0 0 auto;
+}
+.AgConsulta{
     cursor: pointer;
 }
-.qntdPacientes {
-    padding: 0;
-    text-align: center;
-    align-items: center;
-    font-size: 3rem;
-}
-.dia {
+.card h1{
+    font-family: Titulo, sans-serif;
     font-size: 1.5rem;
 }
-.nUtil {
-    margin-top: 3dvh;
-    margin-bottom: 3dvh;
-    height: 8rem;
-    min-width: 10rem;
-    max-width: auto;
 
-    background-color: #921c1cc0;
-
-    border-color: black;
-    border-style: solid;
-    border-width: 0.18rem;
-    border-radius: 16px;
-
-    cursor: pointer;
+.row-C {
+    justify-content: center;
 }
+
+.cardDia,
+.nUtil,
 .cardHoje {
     margin-top: 3dvh;
     margin-bottom: 3dvh;
     height: 8rem;
     min-width: 10rem;
     max-width: auto;
-
-    background-color: #002fff70;
-
-    border-color: rgb(38, 0, 255);
+    cursor: pointer;
     border-style: solid;
     border-width: 0.18rem;
     border-radius: 16px;
-
-    cursor: pointer;
 }
 
-.btn-add{
+.cardDia {
+    background-color: #45836c9d;
+    border-color: black;
+}
+
+.nUtil {
+    background-color: #921c1cc0;
+    border-color: black;
+}
+
+.cardHoje {
+    background-color: #002fff70;
+    border-color: rgb(38, 0, 255);
+}
+
+.qntdPacientes {
+    padding: 0;
+    text-align: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.dia {
+    font-size: 1.5rem;
+}
+
+.btn-add {
     background-color: #32a57b;
-    border-color: #ffffff00; 
+    border-color: transparent;
     margin-bottom: 1dvw !important;
     color: rgb(0, 0, 0);
     font-weight: 600;
 }
-.headInfo{
+
+.headInfo {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 3dvh;
 }
-.headInfo h1{
+
+.headInfo h1 {
     max-width: 30rem;
 }
-.infoPacientes{
+
+.infoPacientes {
     display: flex;
     justify-content: space-evenly;
 }
-.infoPacientes h4{
+
+.infoPacientes h4 {
     margin-top: 1.7dvh;
 }
-.dropdown{
+
+.dropdown {
     margin-left: 1.5dvw;
 }
-/* .input-group{
-    max-width: 80dvw;
-} */
-.aFoto{
+
+.aFoto {
     color: rgb(85, 85, 85);
     text-align: center;
 }
 
+/* -------------------------ESTILOS DE MODAL-------------------------- */
 .modal-dialog {
     max-width: 800px; /* Define um tamanho máximo para o modal */
     text-align: center;
@@ -222,87 +273,99 @@ footer {
     object-fit: cover; /* Ajusta a imagem dentro do contêiner */
 }
 
-.container-pA{
+.container-pA {
     max-width: 80%;
 }
-.drop{
+
+.drop {
     display: flex;
 }
-.dropdown-item{
+
+.dropdown-item {
     font-weight: 500;
 }
-.gapBtn{
+
+.gapBtn {
     gap: 0.4dvh;
 }
 
-.iconeMenu{
-    max-width: 2.6dvw;
-}
-
+/* -------------------------ESTILOS RESPONSIVOS-------------------------- */
 @media (max-width: 768px) {
 
-    .col h1{ 
+    .col h1 { 
         font-size: 1rem;
     }
-    .cardDia{
+
+    .cardDia {
         height: 3rem;
         min-width: 1rem;
         max-width: auto;
     }                                                                                                                                                                                                                                                                                                                      
-    .dia{
+    .dia {
         font-size: 1.5rem;
         text-align: center;
         font-weight: 500;
     }
 
-    tbody td{
+    tbody td {
         font-size: 0.85rem;
     }
 
-    .btn-add{
+    .btn-add {
         max-width: 30dvw;
     }
-    .headInfo{
+
+    .headInfo {
         flex-direction: column;
     }
 
-    .card{
+    .card {
         width: 10rem !important;
     }
-    .drop{
+
+    .drop {
         justify-content: center;
     }
+
 }
+
 /* -------------------------CORES DE ELEMENTOS-------------------------- */
 /* BOTOES */
-.btn-verde{
+.btn-verde {
     background-color: #009c63;
     font-weight: 600;
 }
-.btn-verde:hover{
+
+.btn-verde:hover {
     background-color: #017a4e !important;
 }
-.btn-verde.show{
+
+.btn-verde.show {
     background-color: #46af89 !important;
 }
-.btn-laranja{
+
+.btn-laranja {
     background-color: #fc952e !important;
 }
-.btn-laranja.show{
+
+.btn-laranja.show {
     background-color: #eb8d30 !important;
 }
+
 /* DROPS */
-.drop-verde{
+.drop-verde {
     background-color: #389474fd;
 }
-.drop-laranja{
+
+.drop-laranja {
     background-color: #d67616 !important;
 }
-/* DROPS ITENS */
 
-.di-verde:hover{
+/* DROPS ITENS */
+.di-verde:hover {
     background-color: #28d699fd; 
 }
-.di-laranja:hover{
+
+.di-laranja:hover {
     background-color: #df9347; 
 }
