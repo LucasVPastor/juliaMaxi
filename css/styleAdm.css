@@ -4,6 +4,10 @@
     font-family: Titulo;
     src: url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 }
+@font-face{
+    font-family: Roboto;
+    src: url('/asset/font/Roboto-Bold.ttf');
+}
 
 /* -------------------------ESTILOS GERAIS-------------------------- */
 body {
@@ -172,35 +176,41 @@ footer {
     justify-content: center;
 }
 
+th{
+    width: 100dvw;
+}
+th h1{
+    font-size: 1.8rem;
+    font-family: Roboto;
+}
+
 .cardDia,
 .nUtil,
 .cardHoje {
-    margin-top: 3dvh;
-    margin-bottom: 3dvh;
     height: 8rem;
     min-width: 10rem;
     max-width: auto;
     cursor: pointer;
-    border-style: solid;
-    border-width: 0.18rem;
-    border-radius: 16px;
+    border: #b1b1b16e solid 0.18rem;
 }
 
 .cardDia {
-    background-color: #45836c9d;
-    border-color: black;
+    position: relative;
+    background-color: #ffffff9d;
+    text-align: end;
+    padding: 10px; /* Espaçamento interno para o número do dia */
+    overflow: hidden;
 }
-
+.cardDia:hover{
+    background-color: #99939383;
+}
 .nUtil {
-    background-color: #921c1cc0;
-    border-color: black;
+    /* background-color: #383838c0; */
 }
 
 .cardHoje {
-    background-color: #002fff70;
-    border-color: rgb(38, 0, 255);
+    border: #e69d15 solid 0.29rem;
 }
-
 .qntdPacientes {
     padding: 0;
     text-align: center;
@@ -209,8 +219,15 @@ footer {
 }
 
 .dia {
-    font-size: 1.5rem;
+        font-size: 1.5rem;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        text-align: right;
+        font-weight: 500;
+        margin: 0;
 }
+    
 
 .btn-add {
     background-color: #32a57b;

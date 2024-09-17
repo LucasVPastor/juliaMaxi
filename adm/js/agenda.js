@@ -41,13 +41,12 @@ function geraCalen() {
     var ultimoDia = monthLength(numMes, numAno);
 
     // Criar uma linha inicial para os dias da semana
-    var row = document.createElement("div");
-    row.className = "row";
+    var row = document.createElement("tr");
 
     // Adicionar dias vazios antes do primeiro dia do mês, se necessário
     var primeiroDiaSemana = new Date(numAno, numMes, 1).getDay();
     for (var j = 0; j < primeiroDiaSemana; j++) {
-        var emptyCol = document.createElement("div");
+        var emptyCol = document.createElement("td");
         emptyCol.className = "col";
         row.appendChild(emptyCol);
     }
@@ -56,12 +55,11 @@ function geraCalen() {
     for (var i = 1; i <= ultimoDia; i++) {
         if ((i + primeiroDiaSemana - 1) % 7 === 0) {
             calend.appendChild(row);
-            row = document.createElement("div");
-            row.className = "row";
+            row = document.createElement("tr");
         }
 
-        const cardDia = document.createElement("div");
-            cardDia.className = "cardDia col text-center";
+        const cardDia = document.createElement("td");
+            cardDia.className = "cardDia";
             cardDia.setAttribute("data-bs-toggle", "modal");
             cardDia.setAttribute("data-bs-target", "#exampleModal");
             cardDia.id = i;
@@ -69,6 +67,9 @@ function geraCalen() {
         const dia = document.createElement("div");
             dia.className = "dia";
             dia.innerText = i;
+
+        const consulta = document.createElement("p");
+            consulta.innerText = "CONSULTAS: 'X'";
 
         const dataAtual = new Date(numAno, numMes, i);
         const diaSemana = dataAtual.getDay();
@@ -80,6 +81,7 @@ function geraCalen() {
         }
 
         cardDia.appendChild(dia);
+        cardDia.appendChild(consulta);
         row.appendChild(cardDia);
 
         // Adicionar evento de clique ao card para atualizar o modal
@@ -92,7 +94,7 @@ function geraCalen() {
     // Adicionar colunas vazias após o último dia do mês, se necessário
     var ultimoDiaSemana = new Date(numAno, numMes, ultimoDia).getDay();
     for (var k = ultimoDiaSemana + 1; k < 7; k++) {
-        var emptyCol = document.createElement("div");
+        var emptyCol = document.createElement("td");
         emptyCol.className = "col";
         row.appendChild(emptyCol);
     }
